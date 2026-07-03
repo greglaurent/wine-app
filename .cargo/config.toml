@@ -1,0 +1,6 @@
+[net]
+git-fetch-with-cli = true
+
+# Self-hosted kellnr registry serving the abmac-io crates (causal-id, etc.).
+[registries.abmac-io]
+index = "sparse+https://kellnr.abmac.io/api/v1/crates/"

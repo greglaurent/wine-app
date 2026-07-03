@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#13171f" />
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" />
+    <link rel="stylesheet" href="{{ offline_css }}" />
+    <script type="module" src="{{ offline_js }}"></script>
+  </head>
+  <body>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

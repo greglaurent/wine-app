@@ -1,0 +1,8 @@
+target
+.git
+.env
+**/*.swp
+web/node_modules
+web/dist
+web/src/wasm
+web/src/vendor/datastar.js

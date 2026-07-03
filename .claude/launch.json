@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wine-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "DATABASE_URL=postgres://wine:change-me@localhost:5432/wine BIND_ADDR=127.0.0.1:8099 ./target/debug/wine-server"
+      ],
+      "port": 8099
+    }
+  ]
+}

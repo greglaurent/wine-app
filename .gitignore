@@ -1,0 +1,9 @@
+/target
+.env
+*.swp
+
+# web (generated / installed)
+web/node_modules/
+web/dist/
+web/src/wasm/
+web/src/vendor/datastar.js

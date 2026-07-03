@@ -1,0 +1,40 @@
+// Global reference data: countries and bottle formats (no FKs). Country files
+// reference these countries by iso2.
+//
+// Bottle formats are limited to the universally unambiguous sizes. Large-format
+// names diverge by region (3L is "double-magnum" in Bordeaux but "jeroboam" in
+// Champagne/Burgundy), so those are deferred to a region-aware pass.
+(
+    countries: [
+        (iso2: "US", iso3: "USA", name: "United States"),
+        (iso2: "FR", iso3: "FRA", name: "France"),
+        (iso2: "IT", iso3: "ITA", name: "Italy"),
+        (iso2: "DE", iso3: "DEU", name: "Germany"),
+    ],
+    bottle_formats: [
+        (code: "split",    name: "Split",    volume_ml: 187),
+        (code: "half",     name: "Half",     volume_ml: 375),
+        (code: "standard", name: "Standard", volume_ml: 750),
+        (code: "magnum",   name: "Magnum",   volume_ml: 1500),
+    ],
+    // Multi-select wine tags. `category` is a grouping label only -- no rules,
+    // no cardinality (if someone tags a wine red AND white, that is on them).
+    descriptors: [
+        (code: "red",          name: "Red",          category: "color"),
+        (code: "white",        name: "White",        category: "color"),
+        (code: "rose",         name: "Rosé",         category: "color"),
+        (code: "orange",       name: "Orange",       category: "color"),
+        (code: "still",        name: "Still",        category: "fizz"),
+        (code: "sparkling",    name: "Sparkling",    category: "fizz"),
+        (code: "petillant",    name: "Pétillant",    category: "fizz"),
+        (code: "dry",          name: "Dry",          category: "sweetness"),
+        (code: "off-dry",      name: "Off-Dry",      category: "sweetness"),
+        (code: "medium",       name: "Medium",       category: "sweetness"),
+        (code: "sweet",        name: "Sweet",        category: "sweetness"),
+        (code: "fortified",    name: "Fortified",    category: "type"),
+        (code: "dessert",      name: "Dessert",      category: "type"),
+        (code: "late-harvest", name: "Late Harvest", category: "type"),
+        (code: "skin-contact", name: "Skin Contact", category: "type"),
+        (code: "natural",      name: "Natural",      category: "type"),
+    ],
+)

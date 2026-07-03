@@ -1,0 +1,28 @@
+[package]
+name = "wine-client"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# wasm32 target. Service worker intercepts datastar's fetches; a dedicated
+# worker runs this module + sqlite-wasm-rs (OPFS) as the offline responder,
+# rendering the SAME wine-core templates the server uses.
+[dependencies]
+wine-core = { path = "../core" }
+serde.workspace = true
+serde_json.workspace = true
+async-trait.workspace = true
+
+# wasm-only: never pulled into a host build (sqlite-wasm-rs compiles a C shim
+# that only targets wasm32).
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+sqlite-wasm-rs = "0.5"
+sqlite-wasm-vfs = "0.2"
+console_error_panic_hook = "0.1"
+web-sys = { version = "0.3", features = ["console", "Window"] }

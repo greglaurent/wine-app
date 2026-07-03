@@ -1,0 +1,45 @@
+// Logic-bearing single-value vocabularies -- the SINGLE SOURCE OF TRUTH.
+// build.rs regenerates the Rust enums in `core::vocab` from this file (variant
+// names derived from each `code`, PascalCase). These are CODE: compiled into both
+// server and client, validated by the app, stored as plain text. Changing the set
+// needs a rebuild -- by design, because app logic matches on these values.
+//
+// (Multi-select wine descriptors -- color/style/sweetness -- are NOT here; those
+// are pure data: seeded `descriptor` tags, user-extensible at runtime.)
+[
+    (
+        name: "BottleStatus",
+        doc: "Lifecycle state of one physical bottle.",
+        values: [
+            (code: "in_cellar", label: "In cellar"),
+            (code: "consumed",  label: "Consumed"),
+            (code: "gifted",    label: "Gifted"),
+            (code: "sold",      label: "Sold"),
+            (code: "lost",      label: "Lost"),
+            (code: "reserved",  label: "Reserved"),
+            (code: "pending",   label: "Pending"),
+        ],
+    ),
+    (
+        name: "LocationKind",
+        doc: "A storage location's kind (locations self-nest: cellar -> rack -> bin).",
+        values: [
+            (code: "cellar",  label: "Cellar"),
+            (code: "fridge",  label: "Fridge"),
+            (code: "rack",    label: "Rack"),
+            (code: "shelf",   label: "Shelf"),
+            (code: "bin",     label: "Bin"),
+            (code: "case",    label: "Case"),
+            (code: "offsite", label: "Off-site"),
+        ],
+    ),
+    (
+        name: "GrapeColor",
+        doc: "A grape variety's berry color (a variety is one color; a wine gets many).",
+        values: [
+            (code: "red",   label: "Red"),
+            (code: "white", label: "White"),
+            (code: "gray",  label: "Gray"),
+        ],
+    ),
+]

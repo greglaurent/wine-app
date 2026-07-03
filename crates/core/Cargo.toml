@@ -1,0 +1,27 @@
+[package]
+name = "wine-core"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+# core MUST stay wasm-safe: no tokio, no sqlx, no networking.
+# It holds the templates, datastar event generation, handler/render
+# logic and the Store trait -- compiled into BOTH the native server
+# and the wasm client.
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+ron.workspace = true
+time.workspace = true
+askama.workspace = true
+async-trait.workspace = true
+# Lamport hybrid causal id (the user's own crate), from the self-hosted
+# kellnr registry (anonymous read). See .cargo/config.toml.
+# width-u128 pins a consistent id layout across server (native) and wasm client,
+# so client-generated ids are directly comparable (no sync-time remapping).
+causal-id = { version = "1.0.0-rc.1", registry = "abmac-io", features = ["width-u128"] }
+
+# build.rs generates core::vocab enums from src/vocab_enums.ron.
+[build-dependencies]
+serde.workspace = true
+ron.workspace = true

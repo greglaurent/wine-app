@@ -1,0 +1,14 @@
+# Local development overrides -- auto-applied by a bare `docker compose up`.
+# (Do NOT include this file in production; the prod command uses -f explicitly.)
+services:
+  db:
+    # Expose Postgres to the host for psql / cargo sqlx / a host-run server.
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+
+  app:
+    environment:
+      RUST_LOG: "debug,sqlx=warn,tower_http=debug"
+    # Serve the live Vite output (run `pnpm watch` in web/) without a rebuild.
+    volumes:
+      - ./web/dist:/app/web/dist:ro

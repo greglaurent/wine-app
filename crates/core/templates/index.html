@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<hgroup>
+  <h1>Wine Cellar</h1>
+  <p>Self-hosted, offline-first cellar tracker.</p>
+</hgroup>
+
+<article>
+  {% include "fragments/bottle_count.html" %}
+  <button data-on:click="@post('/bottles')">Add a bottle</button>
+  <button class="secondary" data-on:click="@get('/fragments/bottle-count')">Refresh</button>
+  <small>Both go through datastar; the count morphs in place by id.</small>
+</article>
+{% endblock %}

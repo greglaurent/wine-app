@@ -1,0 +1,30 @@
+// United States (TTB, 27 CFR Parts 4 & 9).
+//   - Six appellation KINDS, broad -> narrow. Multi-State / Multi-County are
+//     composites that print per-unit percentages on the label.
+//   - No appellation tiers and NO estate/quality classification exists in the US.
+//   - label_rules: the fixed percentage thresholds that drive form validation.
+//     Note the dependencies: a vintage on an AVA label needs 95% (else 85%);
+//     varietal labeling requires an appellation; "Estate Bottled" is a predicate.
+(
+    appellation_types: [
+        (country: "US", code: "american",    name: "United States (American)", ordinal: 1),
+        (country: "US", code: "multistate",  name: "Multi-State",              ordinal: 2, is_composite: true),
+        (country: "US", code: "state",       name: "State",                    ordinal: 3),
+        (country: "US", code: "multicounty", name: "Multi-County",             ordinal: 4, is_composite: true),
+        (country: "US", code: "county",      name: "County",                   ordinal: 5),
+        (country: "US", code: "AVA",         name: "American Viticultural Area", ordinal: 6),
+    ],
+    label_rules: [
+        (country: "US", kind: "appellation", condition: Some("default"),     min_percent: 75),
+        (country: "US", kind: "appellation", condition: Some("AVA"),         min_percent: 85),
+        (country: "US", kind: "appellation", condition: Some("multistate"),  min_percent: 100, tolerance_percent: Some(2)),
+        (country: "US", kind: "appellation", condition: Some("multicounty"), min_percent: 100, tolerance_percent: Some(2)),
+        (country: "US", kind: "varietal",    condition: Some("default"),     min_percent: 75),
+        (country: "US", kind: "varietal",    condition: Some("labrusca"),    min_percent: 51,
+            notes: Some("Vitis labrusca / strongly-flavored types; 51-74% must state 'contains not less than 51%'.")),
+        (country: "US", kind: "vintage",     condition: Some("AVA"),         min_percent: 95),
+        (country: "US", kind: "vintage",     condition: Some("non-AVA"),     min_percent: 85),
+        (country: "US", kind: "estate_bottled", condition: Some("default"),  min_percent: 100,
+            notes: Some("Winery within the labeled AVA; 100% of grapes from land it owns/controls in that AVA; crushed-to-bottled in one continuous process.")),
+    ],
+)

@@ -1,0 +1,25 @@
+{
+  "name": "wine-web",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.3.0",
+  "scripts": {
+    "vendor": "node scripts/vendor.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "prebuild": "node scripts/vendor.ts",
+    "build": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && vite build",
+    "watch": "node scripts/vendor.ts && vite build --watch"
+  },
+  "dependencies": {
+    "@picocss/pico": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "esbuild": "^0.28.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0",
+    "vite-plugin-pwa": "^1.3.0",
+    "vite-plugin-wasm": "^3.6.0",
+    "workbox-precaching": "^7.4.1"
+  }
+}

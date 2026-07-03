@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-wine}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wine}
+      POSTGRES_DB: ${POSTGRES_DB:-wine}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wine}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-wine}:${POSTGRES_PASSWORD:-wine}@db:5432/${POSTGRES_DB:-wine}
+      BIND_ADDR: 0.0.0.0:8090
+    ports:
+      - "${APP_PORT:-8090}:8090"
+
+volumes:
+  pgdata:

@@ -1,0 +1,61 @@
+// France (INAO / EU). Three axes:
+//   - appellation_types:  the regulatory categories (AOC/AOP, IGP, Vin de France).
+//   - appellation_tiers:  quality tiers built into the appellation system; these
+//                         classify the LAND (Grand Cru, Premier Cru, ...).
+//   - classification_*:   ESTATE classifications. In France only Bordeaux and
+//                         Provence's Cote de Provence Cru Classe are estate-level;
+//                         every other "cru" is an appellation tier above.
+// No label_rules: French labeling is governed per-appellation by each AOC's cahier
+// des charges, not by country-level percentage thresholds (that is a US/TTB model).
+// Champagne's Echelle des Crus (a deprecated village price-rating) is deliberately
+// omitted -- FLAGGED to revisit when Champagne is added.
+//
+// `name` fields carry proper French accents (display strings); codes stay ASCII.
+(
+    appellation_types: [
+        (country: "FR", code: "AOC", name: "Appellation d'Origine Protégée (AOC/AOP)", ordinal: 1),
+        (country: "FR", code: "IGP", name: "Indication Géographique Protégée",          ordinal: 2),
+        (country: "FR", code: "VDF", name: "Vin de France",                             ordinal: 3),
+    ],
+    appellation_tiers: [
+        (country: "FR", code: "grand-cru",   name: "Grand Cru",   rank: 1),
+        (country: "FR", code: "premier-cru", name: "Premier Cru", rank: 2),
+        (country: "FR", code: "village",     name: "Village",     rank: 3),
+        (country: "FR", code: "regionale",   name: "Régionale",   rank: 4),
+    ],
+    classification_systems: [
+        (country: "FR", code: "bordeaux-1855-medoc",     name: "Classement de 1855 - Médoc",               scope: "red",       established: 1855, revised: Some(1973)),
+        (country: "FR", code: "bordeaux-1855-sauternes", name: "Classement de 1855 - Sauternes et Barsac",  scope: "sweet",     established: 1855),
+        (country: "FR", code: "graves",                  name: "Crus Classés de Graves",                   scope: "red_white", established: 1953, revised: Some(1959)),
+        (country: "FR", code: "saint-emilion",           name: "Classement de Saint-Émilion",              scope: "red",       established: 1955, revised: Some(2022)),
+        (country: "FR", code: "cru-bourgeois",           name: "Crus Bourgeois du Médoc",                  scope: "red",       established: 1932, revised: Some(2025)),
+        (country: "FR", code: "cru-artisan",             name: "Crus Artisans du Médoc",                   scope: "red",       established: 1994, revised: Some(2023)),
+        (country: "FR", code: "provence-cru-classe",     name: "Côtes de Provence Cru Classé",             scope: "any",       established: 1955),
+    ],
+    classification_levels: [
+        // 1855 Medoc (red)
+        (country: "FR", system: "bordeaux-1855-medoc", code: "1er",  name: "Premier Cru",    rank: 1),
+        (country: "FR", system: "bordeaux-1855-medoc", code: "2eme", name: "Deuxième Cru",   rank: 2),
+        (country: "FR", system: "bordeaux-1855-medoc", code: "3eme", name: "Troisième Cru",  rank: 3),
+        (country: "FR", system: "bordeaux-1855-medoc", code: "4eme", name: "Quatrième Cru",  rank: 4),
+        (country: "FR", system: "bordeaux-1855-medoc", code: "5eme", name: "Cinquième Cru",  rank: 5),
+        // 1855 Sauternes/Barsac (sweet white)
+        (country: "FR", system: "bordeaux-1855-sauternes", code: "1er-sup", name: "Premier Cru Supérieur", rank: 1),
+        (country: "FR", system: "bordeaux-1855-sauternes", code: "1er",     name: "Premier Cru",           rank: 2),
+        (country: "FR", system: "bordeaux-1855-sauternes", code: "2eme",    name: "Deuxième Cru",          rank: 3),
+        // Graves (single tier; red and white classified separately per estate)
+        (country: "FR", system: "graves", code: "cru-classe", name: "Cru Classé", rank: 1),
+        // Saint-Emilion (red; A/B sub-split)
+        (country: "FR", system: "saint-emilion", code: "pgcc-a", name: "Premier Grand Cru Classé A", rank: 1),
+        (country: "FR", system: "saint-emilion", code: "pgcc-b", name: "Premier Grand Cru Classé B", rank: 2),
+        (country: "FR", system: "saint-emilion", code: "gcc",    name: "Grand Cru Classé",           rank: 3),
+        // Crus Bourgeois du Medoc (three tiers since 2020)
+        (country: "FR", system: "cru-bourgeois", code: "exceptionnel",  name: "Cru Bourgeois Exceptionnel", rank: 1),
+        (country: "FR", system: "cru-bourgeois", code: "superieur",     name: "Cru Bourgeois Supérieur",    rank: 2),
+        (country: "FR", system: "cru-bourgeois", code: "cru-bourgeois", name: "Cru Bourgeois",              rank: 3),
+        // Crus Artisans du Medoc (single tier)
+        (country: "FR", system: "cru-artisan", code: "cru-artisan", name: "Cru Artisan", rank: 1),
+        // Cotes de Provence Cru Classe (single honorific tier)
+        (country: "FR", system: "provence-cru-classe", code: "cru-classe", name: "Cru Classé", rank: 1),
+    ],
+)

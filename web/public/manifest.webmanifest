@@ -1,0 +1,17 @@
+{
+  "name": "Wine Cellar",
+  "short_name": "Cellar",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#13171f",
+  "theme_color": "#13171f",
+  "icons": [
+    {
+      "src": "/static/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

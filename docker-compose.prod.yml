@@ -1,0 +1,25 @@
+# Production overrides. Use explicitly (override file is NOT auto-loaded here):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+services:
+  db:
+    restart: always
+    # Postgres is reachable only on the internal compose network (no host port).
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  app:
+    restart: always
+    environment:
+      RUST_LOG: "info,sqlx=warn"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
