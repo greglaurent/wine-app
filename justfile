@@ -1,50 +1,61 @@
 # wine-app task runner -- `just <recipe>` (run `just` for the list)
 
-set dotenv-load := true
+set shell := ["bash", "-euo", "pipefail", "-c"]
+set dotenv-load
 
 # show all recipes
 default:
     @just --list
 
-# create .env from the example (won't overwrite an existing one)
+# Create .env if absent and install the locked frontend dependencies.
 setup:
-    cp -n .env.example .env || true
+    test -e .env || cp .env.example .env
+    pnpm -C web install --frozen-lockfile
 
 # --- build / check ---
 
-# full build: wasm glue -> frontend bundle (Vite) -> server
-build: build-client
-    cd web && pnpm install && pnpm build
-    cargo build -p wine-server
+# Build WASM and the frontend before serving it.
+frontend: setup build-client
+    pnpm -C web build
+
+# Full build: WASM glue, frontend bundle, server.
+build: frontend
+    cargo build --locked -p wine-server
+
+# Start the dev database, frontend watcher, and server; Ctrl-C stops the latter two.
+dev: frontend db
+    process-compose --no-server --disable-dotenv --config process-compose.yaml up
 
 # build the wasm client + generate JS glue into web/src/wasm (for Vite to bundle)
 build-client:
-    rustup target add wasm32-unknown-unknown
-    cargo build -p wine-client --target wasm32-unknown-unknown
+    cargo build --locked -p wine-client --target wasm32-unknown-unknown
     wasm-bindgen --target bundler --out-dir web/src/wasm \
-        target/wasm32-unknown-unknown/debug/wine_client.wasm
+        "${CARGO_TARGET_DIR:-target}/wasm32-unknown-unknown/debug/wine_client.wasm"
 
-check:
-    cargo check
+# Check native Rust, WASM, frontend types, lint, and tests.
+check: check-native check-client typecheck clippy test
 
-# cargo check the wasm client (excluded from default-members, so `check` misses it)
+check-native:
+    cargo check --locked
+
+# Check the WASM client (excluded from Cargo's default members).
 check-client:
-    cargo check -p wine-client --target wasm32-unknown-unknown
+    cargo check --locked -p wine-client --target wasm32-unknown-unknown
 
-# typecheck the frontend TS without a full build
-typecheck:
-    cd web && pnpm typecheck
+# Generate WASM bindings and typecheck the frontend without bundling it.
+typecheck: setup build-client
+    pnpm -C web typecheck
 
 fmt:
     cargo fmt
 
 # lint native crates AND the wasm client
 clippy:
-    cargo clippy --all-targets -- -D warnings
-    cargo clippy -p wine-client --target wasm32-unknown-unknown -- -D warnings
+    cargo clippy --locked --all-targets -- -D warnings
+    cargo clippy --locked -p wine-client --target wasm32-unknown-unknown -- -D warnings
 
 test:
-    cargo test
+    cargo test --locked
 
 clean:
     cargo clean
@@ -53,7 +64,7 @@ clean:
 
 # run the server on the host (needs the db up: `just db`)
 run:
-    cargo run -p wine-server
+    cargo run --locked -p wine-server
 
 # --- docker compose ---
 

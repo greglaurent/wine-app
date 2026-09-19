@@ -24,6 +24,38 @@ migrations/    Postgres schema (sqlx, embedded at compile time)
 
 ## Run
 
+### Development environment
+
+The Nix flake pins the development tools, following the Cascade setup. It includes
+Rust with the WASM target, Clang 19, the wasm-bindgen CLI selected from `Cargo.lock`,
+Node 24, pnpm, just, and database/container clients. Docker must be running separately.
+
+New flake files must be tracked by Git before `use flake` / `nix develop` can see them.
+With direnv's shell hook and nix-direnv installed:
+
+```sh
+direnv allow
+just setup
+# Edit .env, including DATABASE_URL if you change the database credentials.
+just dev
+```
+
+Alternatively, enter the environment with `nix develop`. `just dev` builds the
+frontend, starts the Docker database, and runs the frontend watcher and Rust server
+with process-compose. Ctrl-C stops the watcher and server; `just down` stops the
+database. Restart `just dev` after Rust changes to rebuild the WASM and server.
+
+`just build` builds the whole app; `just check` checks native Rust, WASM, frontend
+types, Clippy, and Rust tests. `just check-native` checks only native Rust.
+Nix builds use a toolchain-specific directory under `target/`; pnpm caches live in
+`.cache/wine-app/`. Both and `.direnv/` are ignored.
+
+Keep `rust-toolchain.toml` and `web/package.json` aligned with the versions in
+`flake.lock`; the shell checks them. Outside Nix, install the tools above and the
+wasm-bindgen CLI version matching `Cargo.lock`; rustup reads `rust-toolchain.toml`.
+
+### Docker Compose
+
 Compose uses the base + override pattern, so one setup serves both.
 
 ```sh
@@ -40,7 +72,7 @@ Or run only the database in Docker and the server on the host for fast iteration
 
 ```sh
 docker compose up -d db          # Postgres at localhost:5432
-cargo run -p wine-server         # uses DATABASE_URL from .env
+just run                       # loads DATABASE_URL from .env; build assets first
 ```
 
 **Production / self-hosted server** (base + prod -- DB internal-only, restart always, log rotation):

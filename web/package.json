@@ -2,7 +2,7 @@
   "name": "wine-web",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.27.0",
   "scripts": {
     "vendor": "node scripts/vendor.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",

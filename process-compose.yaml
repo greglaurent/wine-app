@@ -1,0 +1,14 @@
+version: "0.5"
+is_strict: true
+
+processes:
+  frontend:
+    command: exec pnpm -C web watch
+    shutdown:
+      signal: 15
+      timeout_seconds: 10
+  server:
+    command: exec cargo run --locked -p wine-server
+    shutdown:
+      signal: 15
+      timeout_seconds: 10

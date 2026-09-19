@@ -1,5 +1,7 @@
 target
 .git
+.direnv
+.cache
 .env
 **/*.swp
 web/node_modules
