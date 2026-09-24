@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, unstable }:
 let
   lock = builtins.fromTOML (builtins.readFile ../Cargo.lock);
   bindgen = builtins.head (builtins.filter (p: p.name == "wasm-bindgen") lock.package);
@@ -9,5 +9,6 @@ in
   wasmBindgen = pkgs.${"wasm-bindgen-cli_" + builtins.replaceStrings [ "." ] [ "_" ] bindgen.version};
   llvm = pkgs.llvmPackages_19;
   node = pkgs.nodejs_24;
-  pnpm = pkgs.pnpm;
+  # pnpm tracks nixpkgs-unstable so the frontend stays on the current major.
+  pnpm = unstable.pnpm;
 }

@@ -1,17 +1,17 @@
 {
-  "name": "Wine Cellar",
-  "short_name": "Cellar",
+  "name": "barback.",
+  "short_name": "barback.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#13171f",
-  "theme_color": "#13171f",
+  "background_color": "#221e22",
+  "theme_color": "#221e22",
   "icons": [
     {
-      "src": "/static/icon.svg",
+      "src": "/brand/app-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

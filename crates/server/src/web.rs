@@ -23,9 +23,7 @@ pub async fn index(State(st): State<AppState>) -> Result<Html<String>, StatusCod
 }
 
 /// datastar `@get` target: just the count fragment, morphed in by its id.
-pub async fn bottle_count_fragment(
-    State(st): State<AppState>,
-) -> Result<Html<String>, StatusCode> {
+pub async fn bottle_count_fragment(State(st): State<AppState>) -> Result<Html<String>, StatusCode> {
     let bottle_count = count_bottles(&st.pool).await?;
     render(BottleCountFragment {
         bottle_count,

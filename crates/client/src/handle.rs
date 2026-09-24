@@ -48,7 +48,9 @@ pub fn handle(method: String, path: String, _body: String) -> Result<String, JsV
                      appellation_types={types} classification_levels={levels}</p>"
                 ))
             }
-            _ => Ok(format!("<p id=\"bottle-count\">no local handler for {method} {path}</p>")),
+            _ => Ok(format!(
+                "<p id=\"bottle-count\">no local handler for {method} {path}</p>"
+            )),
         };
         close(db);
         result.map_err(JsValue::from)

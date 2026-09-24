@@ -134,14 +134,16 @@ pub async fn pull(
 
     let bottles = rows
         .into_iter()
-        .map(|(id, lot_id, status, updated_at, deleted_at, revision)| SyncBottle {
-            id,
-            lot_id,
-            status,
-            updated_at,
-            deleted_at,
-            revision,
-        })
+        .map(
+            |(id, lot_id, status, updated_at, deleted_at, revision)| SyncBottle {
+                id,
+                lot_id,
+                status,
+                updated_at,
+                deleted_at,
+                revision,
+            },
+        )
         .collect();
 
     let cursor = bottle_cursor(&st.pool).await?;

@@ -2,6 +2,7 @@
 
 mod assets;
 mod db;
+mod preview;
 mod seed;
 mod state;
 mod sync;
@@ -24,13 +25,16 @@ use state::AppState;
 async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt()
         .with_env_filter(
-            tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "info".into()),
+            tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()),
         )
         .init();
 
-    let db_url = std::env::var("DATABASE_URL")
-        .map_err(|_| anyhow::anyhow!("DATABASE_URL must be set"))?;
+    if std::env::var("BARBACK_PREVIEW").as_deref() == Ok("1") {
+        return preview::serve().await;
+    }
+
+    let db_url =
+        std::env::var("DATABASE_URL").map_err(|_| anyhow::anyhow!("DATABASE_URL must be set"))?;
     let bind = std::env::var("BIND_ADDR").unwrap_or_else(|_| "0.0.0.0:8090".into());
 
     let pool = db::connect(&db_url).await?;

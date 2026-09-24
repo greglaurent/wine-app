@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barback — palette study</title>
+<style>
+  :root { font-family: system-ui, sans-serif; color: #221e22; background: #faf7f2; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  main { max-width: 1120px; margin: auto; padding: clamp(20px, 5vw, 64px); }
+  h1 { font-size: clamp(32px, 5vw, 52px); letter-spacing: -.04em; margin: 8px 0 16px; }
+  h2 { font-size: 24px; margin: 12px 0; }
+  p { line-height: 1.6; max-width: 65ch; }
+  .eyebrow { font-weight: 650; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 12px; margin: 32px 0; }
+  .swatch { padding: 26px 14px; border-radius: 12px; display: grid; gap: 20px; }
+  .swatch span { font-size: 13px; }
+  .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
+  .panel { padding: 28px; border: 1px solid #44355b; border-radius: 18px; }
+  .dark { background: #221e22; color: #faf7f2; }
+  .wine { border-block: 1px solid currentColor; padding-block: 20px; margin-block: 24px; }
+  .wine strong { display: block; font-size: 20px; }
+  .wine p { margin: 6px 0; font-size: 14px; }
+  .tag { display: inline-block; font-size: 12px; padding: 5px 9px; border-radius: 6px; background: #31263e; color: #faf7f2; }
+  .sample-action { display: inline-block; border-radius: 9px; padding: 12px 18px; font-weight: 650; background: #44355b; color: #faf7f2; }
+  .dark .sample-action { background: #eca72c; color: #221e22; }
+  .notice { font-size: 14px; color: #96330e; }
+  .dark .notice { color: #eca72c; }
+  .orange-line { width: 40px; height: 5px; background: #ee5622; border-radius: 4px; }
+  footer { margin-top: 32px; font-size: 13px; line-height: 1.6; }
+</style>
+<main>
+  <div class="eyebrow">Barback · color study</div>
+  <h1>A warm, clear foundation.</h1>
+  <p>Original plum, charcoal, gold, and orange, paired with warm white. These are static color samples, not a proposed final layout or working controls.</p>
+  <section class="swatches" aria-label="Palette">
+    <div class="swatch" style="background:#44355b;color:#faf7f2"><b>Plum</b><span>#44355B</span></div>
+    <div class="swatch" style="background:#31263e;color:#faf7f2"><b>Deep plum</b><span>#31263E</span></div>
+    <div class="swatch" style="background:#221e22;color:#faf7f2"><b>Charcoal</b><span>#221E22</span></div>
+    <div class="swatch" style="background:#eca72c;color:#221e22"><b>Gold</b><span>#ECA72C</span></div>
+    <div class="swatch" style="background:#ee5622;color:#221e22"><b>Orange</b><span>#EE5622 · AA text</span></div>
+    <div class="swatch" style="background:#faf7f2;border:1px solid #44355b"><b>Warm white</b><span>#FAF7F2</span></div>
+  </section>
+  <div class="panels">
+    <section class="panel" aria-label="Light theme sample">
+      <div class="orange-line" aria-hidden="true"></div>
+      <h2>Your cellar</h2>
+      <p>Find something worth opening.</p>
+      <div class="wine"><strong>Domaine des Cèdres</strong><p>2021 · Pinot Noir · 6 bottles</p><span class="tag">Rack 1 · Row 2 · Column A</span></div>
+      <span class="sample-action">Add bottles</span>
+      <p class="notice">Sync paused · 2 changes saved on this device</p>
+    </section>
+    <section class="panel dark" aria-label="Dark theme sample">
+      <div class="orange-line" aria-hidden="true"></div>
+      <h2>Your cellar</h2>
+      <p>Find something worth opening.</p>
+      <div class="wine"><strong>Domaine des Cèdres</strong><p>2021 · Pinot Noir · 6 bottles</p><span class="tag">Rack 1 · Row 2 · Column A</span></div>
+      <span class="sample-action">Add bottles</span>
+      <p class="notice">Sync paused · 2 changes saved on this device</p>
+    </section>
+  </div>
+  <footer>Light-theme orange text uses the proposed darker variant <b>#96330E</b> (7.08:1 on warm white). Original orange remains an accent. Sample wine data is fictional. Contrast calculations assume opaque solid colors; complete accessibility requires testing the final components and interactions.</footer>
+</main>
+</html>

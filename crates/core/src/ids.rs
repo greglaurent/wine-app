@@ -20,6 +20,9 @@ use serde::{Deserialize, Serialize};
 
 use causal_id::{CausalId, IdFactory, PTR_WIDTH_BITS};
 
+// Persisted and synced IDs must retain the same layout on native and WASM.
+const _: () = assert!(PTR_WIDTH_BITS == 128);
+
 /// Bits reserved for the source identifier (device/server). The remaining
 /// high bits hold the monotonic Lamport tick.
 pub const SOURCE_BITS: u32 = 16;

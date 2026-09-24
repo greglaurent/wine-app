@@ -14,7 +14,14 @@ use wine_core::ids::IdGen;
 use wine_core::seed;
 
 /// Existing classification_system row (id, name, scope, established, revised, notes).
-type SystemRow = (String, String, String, Option<i16>, Option<i16>, Option<String>);
+type SystemRow = (
+    String,
+    String,
+    String,
+    Option<i16>,
+    Option<i16>,
+    Option<String>,
+);
 
 pub async fn sync_reference_data(pool: &PgPool, ids: &IdGen) -> anyhow::Result<()> {
     let data = seed::load()?;
@@ -46,9 +53,9 @@ pub async fn sync_reference_data(pool: &PgPool, ids: &IdGen) -> anyhow::Result<(
 
     let mut system_id: HashMap<(&str, &str), String> = HashMap::new();
     for s in &data.classification_systems {
-        let cid = country_id
-            .get(s.country.as_str())
-            .with_context(|| format!("classification_system {} -> country {}", s.code, s.country))?;
+        let cid = country_id.get(s.country.as_str()).with_context(|| {
+            format!("classification_system {} -> country {}", s.code, s.country)
+        })?;
         let id = upsert_classification_system(pool, ids, s, cid).await?;
         system_id.insert((s.country.as_str(), s.code.as_str()), id);
     }
@@ -59,9 +66,12 @@ pub async fn sync_reference_data(pool: &PgPool, ids: &IdGen) -> anyhow::Result<(
         upsert_classification_level(pool, ids, l, sid).await?;
     }
     for r in &data.label_rules {
-        let cid = country_id
-            .get(r.country.as_str())
-            .with_context(|| format!("label_rule {}/{} -> country {}", r.kind, r.country, r.country))?;
+        let cid = country_id.get(r.country.as_str()).with_context(|| {
+            format!(
+                "label_rule {}/{} -> country {}",
+                r.kind, r.country, r.country
+            )
+        })?;
         upsert_label_rule(pool, ids, r, cid).await?;
     }
 
@@ -111,7 +121,11 @@ async fn upsert_country(pool: &PgPool, ids: &IdGen, c: &seed::Country) -> anyhow
     Ok(id)
 }
 
-async fn upsert_bottle_format(pool: &PgPool, ids: &IdGen, b: &seed::BottleFormat) -> anyhow::Result<()> {
+async fn upsert_bottle_format(
+    pool: &PgPool,
+    ids: &IdGen,
+    b: &seed::BottleFormat,
+) -> anyhow::Result<()> {
     let row: Option<(String, String, i32)> =
         sqlx::query_as("SELECT id, name, volume_ml FROM bottle_format WHERE code = $1")
             .bind(&b.code)
@@ -286,10 +300,10 @@ async fn upsert_classification_system(
         "SELECT id, name, scope, established, revised, notes FROM classification_system \
          WHERE country_id=$1 AND code=$2",
     )
-        .bind(country_id)
-        .bind(&s.code)
-        .fetch_optional(pool)
-        .await?;
+    .bind(country_id)
+    .bind(&s.code)
+    .fetch_optional(pool)
+    .await?;
     if let Some((id, name, scope, established, revised, notes)) = row {
         if name != s.name
             || scope != s.scope

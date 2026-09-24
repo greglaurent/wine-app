@@ -41,13 +41,19 @@ impl Assets {
     }
 
     fn resolve() -> anyhow::Result<Self> {
+        Self::load_entry(ENTRY)
+    }
+
+    pub fn load_entry(entry_name: &str) -> anyhow::Result<Self> {
         let raw = std::fs::read_to_string(MANIFEST).map_err(|e| {
-            anyhow::anyhow!("{MANIFEST} not found ({e}) -- build the frontend: `cd web && pnpm build`")
+            anyhow::anyhow!(
+                "{MANIFEST} not found ({e}) -- build the frontend: `cd web && pnpm build`"
+            )
         })?;
         let map: HashMap<String, ManifestEntry> = serde_json::from_str(&raw)?;
         let entry = map
-            .get(ENTRY)
-            .ok_or_else(|| anyhow::anyhow!("`{ENTRY}` missing from Vite manifest"))?;
+            .get(entry_name)
+            .ok_or_else(|| anyhow::anyhow!("`{entry_name}` missing from Vite manifest"))?;
         Ok(Assets {
             offline_js: format!("/{}", entry.file),
             offline_css: entry

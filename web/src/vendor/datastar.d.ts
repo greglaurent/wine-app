@@ -1,3 +1,2 @@
-// datastar ships as a prebuilt bundle with no type declarations; it is imported
-// only for its side effect (it self-initializes on load), so it exposes nothing.
-export {};
+// Minimal declaration for the vendored Datastar signal API used by the preview.
+export function mergePatch(patch: Record<string, unknown>): void;

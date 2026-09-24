@@ -24,6 +24,20 @@ migrations/    Postgres schema (sqlx, embedded at compile time)
 
 ## Run
 
+### Barback design preview
+
+In the development shell, run `just preview`, then open
+<http://127.0.0.1:8091>. This is the first desktop/mobile layout study for Barback,
+using the existing Rust, Axum, shared Askama, Datastar, TypeScript, and Vite stack.
+It starts without Postgres and serves sample data; no authentication, inventory
+writes, worker, or sync is connected. Restart after changing Rust or templates.
+
+Try collection search and filters, a wine's details, opening a bottle and Undo,
+adding bottles, rack setup, cellar selection, and tasting entry. Appearance and
+offline/session-expired states are available from the status button at the top.
+Refresh resets the sample interactions; only the appearance preference persists.
+See [the review guide](docs/design-preview.md) for the scope and review sequence.
+
 ### Development environment
 
 The Nix flake pins the development tools, following the Cascade setup. It includes

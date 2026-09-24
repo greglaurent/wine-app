@@ -1,0 +1,187 @@
+//! Static design fixtures and shared Askama renderer. No domain writes.
+
+use askama::Template;
+
+pub struct PreviewWine {
+    pub id: usize,
+    pub producer: &'static str,
+    pub name: &'static str,
+    pub vintage: &'static str,
+    pub region: &'static str,
+    pub country: &'static str,
+    pub style: &'static str,
+    pub grape: &'static str,
+    pub count: usize,
+    pub price: &'static str,
+    pub rating: &'static str,
+    pub location: &'static str,
+    pub label: &'static str,
+}
+
+#[derive(Template)]
+#[template(path = "preview.html")]
+pub struct PreviewTemplate {
+    pub js: String,
+    pub css: String,
+    pub wines: Vec<PreviewWine>,
+}
+
+impl PreviewTemplate {
+    pub fn new(js: String, css: String) -> Self {
+        let rows = [
+            (
+                "Domaine des Cedres",
+                "Les Terrasses",
+                "2021",
+                "Cotes du Rhone",
+                "France",
+                "red",
+                "Grenache / Syrah",
+                6,
+                "24.00",
+                "4.2",
+                "Main rack",
+                "DC",
+            ),
+            (
+                "North Coast Cellars",
+                "Coastal Pinot Noir",
+                "2022",
+                "Sonoma Coast",
+                "United States",
+                "red",
+                "Pinot Noir",
+                4,
+                "38.00",
+                "4.5",
+                "Main rack",
+                "NC",
+            ),
+            (
+                "Maison Laurent",
+                "Blanc de Blancs",
+                "",
+                "Champagne",
+                "France",
+                "sparkling",
+                "Chardonnay",
+                3,
+                "52.00",
+                "4.6",
+                "Wine fridge",
+                "ML",
+            ),
+            (
+                "Tenuta del Sole",
+                "Chianti Classico",
+                "2020",
+                "Tuscany",
+                "Italy",
+                "red",
+                "Sangiovese",
+                5,
+                "29.00",
+                "4.3",
+                "Main rack",
+                "TS",
+            ),
+            (
+                "Weingut Berg",
+                "Riesling Trocken",
+                "2023",
+                "Mosel",
+                "Germany",
+                "white",
+                "Riesling",
+                4,
+                "22.00",
+                "4.1",
+                "Wine fridge",
+                "WB",
+            ),
+            (
+                "Domaine du Matin",
+                "Rose de Provence",
+                "2024",
+                "Provence",
+                "France",
+                "rose",
+                "Grenache",
+                2,
+                "19.00",
+                "4.0",
+                "Unplaced",
+                "DM",
+            ),
+            (
+                "Willow Creek",
+                "Estate Chardonnay",
+                "2022",
+                "Willamette Valley",
+                "United States",
+                "white",
+                "Chardonnay",
+                3,
+                "32.00",
+                "4.4",
+                "Wine fridge",
+                "WC",
+            ),
+            (
+                "Bodega Sierra",
+                "Reserva",
+                "2019",
+                "Rioja",
+                "Spain",
+                "red",
+                "Tempranillo",
+                3,
+                "34.00",
+                "4.5",
+                "Main rack",
+                "BS",
+            ),
+        ];
+        Self {
+            js,
+            css,
+            wines: rows
+                .into_iter()
+                .enumerate()
+                .map(
+                    |(
+                        id,
+                        (
+                            producer,
+                            name,
+                            vintage,
+                            region,
+                            country,
+                            style,
+                            grape,
+                            count,
+                            price,
+                            rating,
+                            location,
+                            label,
+                        ),
+                    )| PreviewWine {
+                        id,
+                        producer,
+                        name,
+                        vintage,
+                        region,
+                        country,
+                        style,
+                        grape,
+                        count,
+                        price,
+                        rating,
+                        location,
+                        label,
+                    },
+                )
+                .collect(),
+        }
+    }
+}

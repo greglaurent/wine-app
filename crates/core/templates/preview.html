@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7f2">
+  <title>barback. · Your collection, within reach</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ css }}">
+  <script type="module" src="{{ js }}"></script>
+</head>
+<body data-signals="{rackslot: '', rackaction: false, page: 'inventory', selected: 0, search: '', filter: 'all', layout: 'grid', cellar: 'Home cellar', network: 'synced', consumed: [], consumedslots: {}, notice: '', undoid: -1, slot: 'A1', quantity: 1, country: 'France', producer: '', winename: '', vintage: '', price: '', destination: 'Unplaced', entrycellar: 'Home cellar', entryslots: [], placementsummary: 'Unplaced', draft: false, added: false, setupname: '', rows: 4, columns: 6}">
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 3h4v6l3 4v8H7v-8l3-4zM10 6h4M7 15h10"/></symbol>
+    <symbol id="i-rack" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 15l4-5 4 2 5-7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 5h12M9 12h12M9 19h12M3 5h1M3 12h1M3 19h1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m10 5-7 7 7 7M3 12h18"/></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><path d="M7 3h10l1 6a6 6 0 0 1-12 0l1-6zM12 15v6M8 21h8M6 8h12"/></symbol>
+  </defs></svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <aside class="sidebar" aria-label="Main navigation">
+    <a href="#inventory" class="brand" aria-label="barback. home"><img class="brand-image brand-light" src="/brand/wordmark-light.svg" alt="" width="2080" height="415"><img class="brand-image brand-dark" src="/brand/wordmark-dark.svg" alt="" width="2080" height="415"></a>
+    <button class="cellar-switch" data-dialog="cellars"><span class="avatar">H</span><span><strong data-text="$cellar">Home cellar</strong><small>Your personal collection</small></span><span class="chevron">⌄</span></button>
+    <div class="nav-label">YOUR COLLECTION</div>
+    <nav>
+      <a href="#inventory" data-attr:aria-current="$page === 'inventory' || $page === 'detail' ? 'page' : null"><svg><use href="#i-bottle"/></svg>Inventory<span class="nav-count" data-text="30 - $consumed.length">30</span></a>
+      <a href="#storage" data-attr:aria-current="$page === 'storage' ? 'page' : null"><svg><use href="#i-rack"/></svg>Storage</a>
+      <a href="#insights" data-attr:aria-current="$page === 'insights' ? 'page' : null"><svg><use href="#i-chart"/></svg>Insights<span class="tiny">Preview</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="theme-control"><button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode" data-theme-toggle><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/></svg><span class="theme-thumb" aria-hidden="true"></span></button><button type="button" class="theme-reset" data-theme-reset hidden>Use system</button></div>
+      <button class="profile" data-dialog="review"><span class="avatar small">G</span><span><strong>Greg</strong><small>Owner · Design preview</small></span><span>⋯</span></button>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="breadcrumb"><a href="#inventory" class="mobile-brand" aria-label="barback. home"><img class="brand-image brand-light" src="/brand/wordmark-light.svg" alt="" width="2080" height="415"><img class="brand-image brand-dark" src="/brand/wordmark-dark.svg" alt="" width="2080" height="415"></a><button class="desktop-cellar-picker" data-dialog="cellars" aria-haspopup="dialog" aria-controls="cellars" data-text="$cellar">Home cellar</button><span class="desktop-only">/</span><span class="desktop-only" data-text="$page === 'detail' ? 'Wine details' : $page === 'add' ? 'Add bottles' : $page === 'storage' ? 'Storage' : $page === 'insights' ? 'Insights' : 'Inventory'"></span></div><button class="sync-status" data-dialog="review"><span class="status-dot" data-class:paused="$network !== 'synced'"></span><span data-text="$network === 'synced' ? 'Up to date' : $network === 'offline' ? 'Offline · 2 pending' : 'Sync paused'"></span><span class="sample-badge">Sample</span></button></header>
+    <div class="mobile-cellar-row"><button class="mobile-cellar-picker" data-dialog="cellars" aria-haspopup="dialog" aria-controls="cellars" data-attr:aria-label="'Change cellar: ' + $cellar"><svg aria-hidden="true"><use href="#i-rack"/></svg><span class="cellar-context-label">Cellar</span><strong data-text="$cellar">Home cellar</strong><svg class="cellar-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button></div>
+    <div class="connection-banner" data-show="$network !== 'synced'" hidden><strong data-text="$network === 'offline' ? 'You’re offline. Your cellar is still here.' : 'Sign in to resume syncing.'"></strong><span>2 changes saved on this device.</span><button data-show="$network === 'expired'" data-dialog="signin">Sign in</button></div>
+    <main id="main" tabindex="-1">
+      <section class="page" data-page="inventory" aria-labelledby="inventory-heading">
+        <div class="page-heading"><div><div class="eyebrow">A GOOD BOTTLE STARTS HERE</div><h1 id="inventory-heading">Your collection</h1><p>Something for tonight. Something worth waiting for.</p></div><a href="#add" class="button primary"><svg><use href="#i-plus"/></svg>Add bottles</a></div>
+        <div class="collection-summary"><span><strong data-text="30 - $consumed.length">30</strong> bottles available</span><span><strong>8</strong> wines</span><button data-on:click="$filter = 'unplaced'"><span class="small-dot"></span>2 unplaced <span aria-hidden="true">↗</span></button><span class="summary-end">Make room for something good.</span></div>
+        <div class="toolbar"><label class="search"><svg><use href="#i-search"/></svg><input type="search" aria-label="Search your collection" placeholder="Search wine, producer, region…" data-bind:search><kbd class="desktop-only">/</kbd></label><div class="view-toggle" aria-label="Inventory layout"><button aria-label="Grid view" data-attr:aria-pressed="$layout === 'grid'" data-on:click="$layout = 'grid'"><svg><use href="#i-grid"/></svg></button><button aria-label="List view" data-attr:aria-pressed="$layout === 'list'" data-on:click="$layout = 'list'"><svg><use href="#i-list"/></svg></button></div></div>
+        <div class="filter-line"><div class="chips" aria-label="Filter wines"><button data-on:click="$filter = 'all'" data-attr:aria-pressed="$filter === 'all'">All wines <span>8</span></button><button data-on:click="$filter = 'red'" data-attr:aria-pressed="$filter === 'red'"><i class="wine-dot red"></i>Red</button><button data-on:click="$filter = 'white'" data-attr:aria-pressed="$filter === 'white'"><i class="wine-dot white"></i>White</button><button data-on:click="$filter = 'rose'" data-attr:aria-pressed="$filter === 'rose'"><i class="wine-dot rose"></i>Rosé</button><button data-on:click="$filter = 'sparkling'" data-attr:aria-pressed="$filter === 'sparkling'">Sparkling</button><button data-on:click="$filter = 'unplaced'" data-attr:aria-pressed="$filter === 'unplaced'">Unplaced</button></div><span class="sort-label">Sample collection</span></div>
+        <div class="wine-grid" data-class:list-view="$layout === 'list'" id="wine-results">
+        {% for wine in wines %}
+          <a class="wine-card" href="#wine-{{ wine.id }}" data-wine-card data-show="($filter === 'all' || $filter === '{{ wine.style }}' || ($filter === 'unplaced' &amp;&amp; '{{ wine.location }}' === 'Unplaced')) &amp;&amp; '{{ wine.producer }} {{ wine.name }} {{ wine.region }} {{ wine.grape }} {{ wine.vintage }}'.toLowerCase().includes($search.toLowerCase())">
+            <div class="wine-art {{ wine.style }}"><span class="wine-kind">{{ wine.style }}</span><div class="wine-monogram" aria-hidden="true">{{ wine.label }}</div>{% if !wine.vintage.is_empty() %}<span class="art-year">{{ wine.vintage }}</span>{% endif %}<span class="rating"><span aria-hidden="true">★</span> {{ wine.rating }}</span></div>
+            <div class="wine-info"><div class="wine-origin">{{ wine.region }} · {{ wine.country }}</div><h2>{{ wine.producer }}</h2><p>{{ wine.name }}</p><div class="card-bottom"><span><strong data-text="{{ wine.count }} - ($consumed.includes({{ wine.id }}) ? 1 : 0)">{{ wine.count }}</strong> bottles</span><span class="location" data-class:unplaced="'{{ wine.location }}' === 'Unplaced'">{{ wine.location }} <span aria-hidden="true">↗</span></span></div></div>
+          </a>
+        {% endfor %}
+        </div>
+        <div class="empty-state" id="empty-results" hidden><svg><use href="#i-search"/></svg><h2>No bottles found</h2><p>Try another wine, producer, or region.</p><button class="button secondary" data-on:click="$search = ''; $filter = 'all'">Clear filters</button></div>
+        <p class="page-footnote">A little order. More enjoyment.</p>
+      </section>
+
+      <section class="page" data-page="detail" hidden aria-label="Wine details">
+        <a href="#inventory" class="back-link"><svg><use href="#i-arrow"/></svg>Your collection</a>
+        {% for wine in wines %}
+        <article class="detail-layout" data-show="$selected === {{ wine.id }}">
+          <div class="detail-art wine-art {{ wine.style }}"><div class="wine-monogram" aria-hidden="true">{{ wine.label }}</div><span class="art-caption">{{ wine.country }}{% if !wine.vintage.is_empty() %} · {{ wine.vintage }}{% endif %}</span></div>
+          <div class="detail-copy"><div class="eyebrow">{{ wine.region }} / {{ wine.country }}</div><h1>{{ wine.producer }}</h1><p class="wine-subtitle">{{ wine.name }}{% if !wine.vintage.is_empty() %} · {{ wine.vintage }}{% endif %}</p><div class="detail-tags"><span>{{ wine.grape }}</span><span>750 ml</span><span class="stars">★ {{ wine.rating }} <small>your latest rating</small></span></div>
+            <div class="availability"><div><strong data-text="{{ wine.count }} - ($consumed.includes({{ wine.id }}) ? 1 : 0)"></strong><span>bottles available</span></div><span>{{ wine.location }}<small>Home cellar</small></span></div>
+            <div class="action-row"><button class="button primary" data-dialog="consume" data-on:click="$slot = 'A1'" data-attr:disabled="$consumed.includes({{ wine.id }})"><svg><use href="#i-glass"/></svg><span data-text="$consumed.includes({{ wine.id }}) ? 'Bottle consumed in preview' : 'Open a bottle'"></span></button><button class="button secondary" data-dialog="placement" data-placement-wine="{{ wine.id }}">{% if wine.location == "Unplaced" %}Place bottles{% else %}Move a bottle{% endif %}</button></div>
+            <section class="detail-section"><h2>Your bottles</h2><p class="muted">Two sample bottle locations for this flow.</p><div class="bottle-row"><span class="slot-marker">{% if wine.location == "Unplaced" %}—{% else %}A1{% endif %}</span><span><strong>{{ wine.location }}</strong><small>{% if wine.location == "Unplaced" %}Waiting for a home{% else %}Row 1 · Column A{% endif %}</small></span><span class="state-label" data-text="$consumedslots[{{ wine.id }}] === 'A1' ? 'Consumed' : 'Available'"></span></div><div class="bottle-row"><span class="slot-marker">{% if wine.location == "Unplaced" %}—{% else %}A2{% endif %}</span><span><strong>{{ wine.location }}</strong><small>{% if wine.location == "Unplaced" %}Waiting for a home{% else %}Row 2 · Column A{% endif %}</small></span><span class="state-label" data-text="$consumedslots[{{ wine.id }}] === 'A2' ? 'Consumed' : 'Available'"></span></div></section>
+            <details class="purchase-details"><summary>Purchase details <span>Last paid ${{ wine.price }} / bottle</span></summary><dl><div><dt>Purchased</dt><dd>September 12, 2026</dd></div><div><dt>Seller</dt><dd>Neighborhood Wine Shop</dd></div><div><dt>Price per bottle</dt><dd>${{ wine.price }} USD</dd></div></dl></details>
+            <section class="detail-section"><div class="section-heading"><h2>Your tasting notes</h2><button class="text-button" data-dialog="tasting">Add a note</button></div><div class="tasting-card"><span class="stars">★ {{ wine.rating }}</span><small>Greg · September 14, 2026</small><p>Fresh and balanced, with a lovely long finish. Worth opening another with dinner.</p></div></section>
+          </div>
+        </article>
+        {% endfor %}
+      </section>
+
+      <section class="page" data-page="add" hidden aria-labelledby="add-heading">
+        <a href="#inventory" class="back-link"><svg><use href="#i-arrow"/></svg>Your collection</a>
+        <div class="page-heading"><div><div class="eyebrow">MAKE ROOM FOR SOMETHING GOOD</div><h1 id="add-heading">Add bottles</h1><p>A few details now. A bottle easy to find later.</p></div><span class="draft-status" data-show="$draft">Draft in this preview</span></div>
+        <form id="add-form" class="entry-layout" data-on:input="$draft = true">
+          <div class="entry-main">
+            <fieldset class="form-panel"><legend><span>01</span> The wine</legend><div class="form-grid">
+              <label class="full">Country <span class="required">Required</span><select required data-bind:country><option>France</option><option>United States</option><option>Italy</option><option>Germany</option><option>Spain</option></select><small>Sets the regions and classifications available below.</small></label>
+              <label>Producer <input name="producer" required placeholder="e.g. Domaine des Cedres" data-bind:producer list="producer-options"><datalist id="producer-options">{% for wine in wines %}<option value="{{ wine.producer }}"></option>{% endfor %}</datalist></label>
+              <label>Wine name <input name="wine" required placeholder="e.g. Les Terrasses" data-bind:winename></label>
+              <label>Vintage <span class="optional">Optional</span><input name="vintage" type="number" min="1800" max="2100" inputmode="numeric" placeholder="Year, if known" data-bind:vintage></label>
+              <label>Style <select name="style"><option>Red</option><option>White</option><option>Rosé</option><option>Sparkling</option><option>Dessert</option><option>Fortified</option></select></label>
+              <label>Appellation type <select data-show="$country === 'France'"><option>AOC</option><option>IGP</option><option>Vin de France</option></select><select data-show="$country === 'United States'" hidden><option>AVA</option><option>County</option><option>State</option></select><select data-show="$country !== 'France' &amp;&amp; $country !== 'United States'" hidden><option>Not specified</option></select></label>
+              <label>Region / appellation <input placeholder="e.g. Cotes du Rhone"></label>
+            </div><details class="more-fields"><summary>Classification &amp; more details</summary><div class="form-grid"><label data-show="$country === 'France'">Classification system<select><option>None specified</option><option>1855 Médoc</option><option>Saint-Émilion</option></select></label><label>Grape varieties<input placeholder="e.g. Grenache, Syrah"></label><label>Bottle size<select><option>Standard · 750 ml</option><option>Half · 375 ml</option><option>Magnum · 1.5 L</option></select></label></div></details></fieldset>
+            <fieldset class="form-panel"><legend><span>02</span> The bottles</legend>
+              <div class="form-grid">
+                <label>Quantity<input type="number" name="quantity" min="1" max="99" required data-bind:quantity></label>
+                <label>Cellar<select name="entry-cellar" data-bind:entrycellar><option>Home cellar</option><option>Weekend cellar</option></select></label>
+                <label class="full">Store in<select name="destination" data-bind:destination><option>Unplaced</option><option>Main rack</option><option>Wine fridge</option></select></label>
+              </div>
+              <div id="entry-placement" hidden>
+                <div class="section-heading entry-slot-heading"><h2>Choose open slots</h2><span id="entry-slot-count" class="badge" aria-live="polite"></span></div>
+                <p class="field-help">One bottle per slot. Select a slot again to clear it.</p>
+                <div class="slot-picker-scroll"><div id="entry-slot-grid" class="entry-slot-grid" role="group" aria-label="Bottle storage slots"></div></div>
+                <p class="field-help">Filled slots are unavailable. You can leave bottles unplaced and find a home for them later.</p>
+              </div>
+              <p id="entry-placement-summary" class="placement-summary" aria-live="polite" data-text="$placementsummary"></p>
+            </fieldset>
+            <fieldset class="form-panel"><legend><span>03</span> Purchase <small>Optional</small></legend><div class="form-grid"><label>Price per bottle <span class="optional">USD</span><div class="money-input"><span>$</span><input type="number" name="price" min="0" step="0.01" placeholder="0.00" data-bind:price></div></label><label>Purchase date<input type="date" name="date"></label><label class="full">Purchased from<input placeholder="Wine shop, winery, or wherever you found it"></label></div></fieldset>
+          </div>
+          <aside class="entry-summary"><span class="eyebrow">AT A GLANCE</span><div class="summary-monogram"><span class="wine-monogram" aria-hidden="true" data-text="$producer.trim().split(/\s+/).map(word => word[0]).join('').slice(0, 2).toUpperCase() || 'BB'">BB</span></div><h2 data-text="$winename || 'Your next good find'">Your next good find</h2><p data-text="$producer || 'Wine details will appear here'"></p><dl><div><dt>Bottles</dt><dd data-text="$quantity"></dd></div><div><dt>Cellar</dt><dd data-text="$entrycellar"></dd></div><div><dt>Placement</dt><dd data-text="$placementsummary"></dd></div><div><dt>Per bottle</dt><dd data-text="$price === '' ? 'Not entered' : '$' + Number($price).toFixed(2)"></dd></div><div data-show="$price !== ''"><dt>Total value</dt><dd data-text="'$' + (Number($price) * Number($quantity)).toFixed(2)"></dd></div></dl><button class="button primary full" type="submit"><svg><use href="#i-plus"/></svg><span data-text="'Add ' + $quantity + (Number($quantity) === 1 ? ' bottle' : ' bottles')"></span></button><p class="preview-note">Design preview · this demonstrates the flow without saving inventory.</p></aside>
+        </form>
+      </section>
+
+      <section class="page" data-page="storage" hidden aria-labelledby="storage-heading">
+        <div class="page-heading"><div><div class="eyebrow">EVERY BOTTLE HAS A PLACE</div><h1 id="storage-heading">Your storage</h1><p>A little less searching. A little more enjoying.</p></div><button class="button secondary" data-dialog="setup"><svg><use href="#i-plus"/></svg>Add storage</button></div>
+        <div class="storage-layout"><div class="rack-panel"><div class="section-heading"><div><h2>Main rack</h2><p>4 rows · 6 columns</p></div><span class="badge">Single-bottle slots</span></div><div class="rack-legend"><span><i class="wine-dot red"></i>Red</span><span><i class="wine-dot white"></i>White</span><span><i class="empty-dot"></i>Available</span></div><div class="rack-scroll"><div class="rack" id="rack" aria-label="Main rack, choose a slot"></div></div><p class="field-help">Select an occupied slot for a quick look and bottle actions. Select an empty slot to place one.</p></div><div class="storage-sidebar">
+          <section id="rack-summary" class="rack-summary" aria-labelledby="rack-summary-title" hidden>
+            <div class="rack-summary-heading"><div><span class="eyebrow">IN THIS SLOT</span><h2 id="rack-summary-title" tabindex="-1"><span id="summary-rack-name">Main rack</span> · <span data-text="$rackslot"></span></h2></div><button type="button" id="close-rack-summary" aria-label="Close bottle summary">×</button></div>
+            {% for wine in wines %}
+            <div data-summary-wine="{{ wine.id }}" data-show="$selected === {{ wine.id }}">
+              <div class="rack-wine-heading"><span class="wine-monogram wine-marker {{ wine.style }}" aria-hidden="true">{{ wine.label }}</span><div><h3>{{ wine.producer }}</h3><p>{{ wine.name }}{% if !wine.vintage.is_empty() %} · {{ wine.vintage }}{% endif %}</p></div></div>
+              <p class="rack-wine-origin">{{ wine.region }} · {{ wine.country }}</p>
+              <div class="rack-wine-facts"><span>{{ wine.style }} · 750 ml</span><span class="stars">★ {{ wine.rating }} <span class="muted">latest rating</span></span></div>
+              <div class="rack-quick-actions"><button class="button primary" data-dialog="consume" data-attr:disabled="$consumed.includes({{ wine.id }})"><svg><use href="#i-glass"/></svg>Open this bottle</button><button class="button secondary" data-dialog="placement" data-placement-wine="{{ wine.id }}">Move bottle</button></div>
+              <a class="rack-details-link" href="#wine-{{ wine.id }}">View full wine details <span aria-hidden="true">↗</span></a>
+              <p class="preview-note" data-show="$consumed.includes({{ wine.id }})">One consumption per wine in this sample. Undo to try another slot.</p>
+            </div>
+            {% endfor %}
+          </section>
+          <section id="placement-panel" class="rack-summary placement-panel" aria-labelledby="placement-panel-title" hidden>
+            <div class="rack-summary-heading"><div><span class="eyebrow" id="placement-context"></span><h2 id="placement-panel-title" tabindex="-1"></h2></div><button type="button" id="close-placement" class="panel-close" aria-label="Close placement">×</button></div>
+            <div id="placement-known-wine"></div>
+            <div id="placement-bottle-list" role="group" aria-label="Choose an unplaced bottle"></div>
+            <nav id="placement-pagination" class="placement-pagination" aria-label="Unplaced bottle pages" hidden><button type="button" id="placement-previous" aria-label="Previous bottles">←</button><span id="placement-page-status" aria-live="polite"></span><button type="button" id="placement-next" aria-label="Next bottles">→</button></nav>
+            <div id="placement-location-fields"><label>Rack<select id="placement-rack"><option value="main">Main rack</option><option value="fridge">Wine fridge</option></select></label><fieldset class="placement-slot-field"><legend>Choose an open slot</legend><div id="placement-open-slots"></div></fieldset><p id="placement-no-slots" class="field-help" hidden>No open slots in this rack. Choose another rack or leave the bottle unplaced.</p></div>
+            <p class="field-help" id="placement-selection" aria-live="polite"></p>
+            <button type="button" id="confirm-placement" class="button primary full" disabled>Place bottle</button>
+            <p class="preview-note">Placement preview · no inventory is changed.</p>
+          </section>
+          <aside class="unplaced-panel"><span class="eyebrow">WAITING FOR A HOME</span><h2>Unplaced <span class="badge">2</span></h2><p>In your collection. Not in a slot yet.</p><div class="unplaced-wine"><span class="wine-dot rose"></span><div><strong>Domaine du Matin</strong><small>Rosé de Provence · 2024</small><small>2 bottles</small></div></div><button class="button secondary full" data-dialog="placement" data-placement-wine="5">Find a place</button><div class="storage-tip"><svg><use href="#i-check"/></svg><p>When you open a bottle, its slot becomes available automatically.</p></div></aside></div></div>
+      </section>
+
+      <section class="page" data-page="insights" hidden aria-labelledby="insights-heading">
+        <div class="page-heading"><div><div class="eyebrow">YOUR CELLAR, AT A GLANCE</div><h1 id="insights-heading">A little perspective</h1><p>The bottles, places, and tastes that make it yours.</p></div><span class="badge">Current collection · Sample</span></div>
+        <div class="dashboard-grid">
+          <article class="cellar-overview">
+            <div class="section-heading"><span class="eyebrow">YOUR COLLECTION</span><span class="overview-stamp" data-text="$cellar">Home cellar</span></div>
+            <div class="overview-total"><strong data-text="30 - $consumed.length">30</strong><span>bottles<br>within reach</span></div>
+            <div class="overview-metrics"><div><strong>8</strong><span>Wines</span></div><div><strong>5</strong><span>Countries</span></div><div><strong>4</strong><span>Styles</span></div></div>
+            <div class="overview-footer"><span>Make room for something good.</span><a href="#inventory">Explore collection ↗</a></div>
+          </article>
+          <article class="dashboard-panel taste-overview">
+            <span class="eyebrow">YOUR TASTE, TAKING SHAPE</span><h2>The latest ratings</h2>
+            <div class="rating-total"><strong>4.3</strong><span><span class="stars" aria-hidden="true">★★★★★</span><small>out of 5 · 8 sample ratings</small></span></div>
+            <div class="favorite-wine"><span class="wine-monogram" aria-hidden="true">ML</span><div><span class="eyebrow">HIGHEST RATED</span><a href="#wine-2"><strong>Maison Laurent</strong><span>Blanc de Blancs ↗</span></a></div><strong class="favorite-score">4.6</strong></div>
+            <p class="field-help">A snapshot of your latest taste of each wine.</p>
+          </article>
+          <article class="dashboard-panel"><div class="section-heading"><h2>A world in your cellar</h2><span class="badge">5 countries</span></div><p class="dashboard-description">Where your collection comes from.</p>
+            <div class="country-stats">
+              <div><span class="country-code">FR</span><span>France</span><strong data-text="11 - $consumed.filter(id => [0,2,5].includes(id)).length">11</strong><span class="country-track"><i data-style:width="((11 - $consumed.filter(id => [0,2,5].includes(id)).length) / (11 - $consumed.filter(id => [0,2,5].includes(id)).length) * 100) + '%'"></i></span></div>
+              <div><span class="country-code">US</span><span>United States</span><strong data-text="7 - $consumed.filter(id => [1,6].includes(id)).length">7</strong><span class="country-track"><i data-style:width="((7 - $consumed.filter(id => [1,6].includes(id)).length) / (11 - $consumed.filter(id => [0,2,5].includes(id)).length) * 100) + '%'"></i></span></div>
+              <div><span class="country-code">IT</span><span>Italy</span><strong data-text="5 - ($consumed.includes(3) ? 1 : 0)">5</strong><span class="country-track"><i data-style:width="((5 - ($consumed.includes(3) ? 1 : 0)) / (11 - $consumed.filter(id => [0,2,5].includes(id)).length) * 100) + '%'"></i></span></div>
+              <div><span class="country-code">DE</span><span>Germany</span><strong data-text="4 - ($consumed.includes(4) ? 1 : 0)">4</strong><span class="country-track"><i data-style:width="((4 - ($consumed.includes(4) ? 1 : 0)) / (11 - $consumed.filter(id => [0,2,5].includes(id)).length) * 100) + '%'"></i></span></div>
+              <div><span class="country-code">ES</span><span>Spain</span><strong data-text="3 - ($consumed.includes(7) ? 1 : 0)">3</strong><span class="country-track"><i data-style:width="((3 - ($consumed.includes(7) ? 1 : 0)) / (11 - $consumed.filter(id => [0,2,5].includes(id)).length) * 100) + '%'"></i></span></div>
+            </div>
+          </article>
+          <article class="dashboard-panel"><div class="section-heading"><h2>Something for every occasion</h2></div><p class="dashboard-description">Your collection by style.</p>
+            <div class="style-stats">
+              <a href="#inventory" data-on:click="$filter = 'red'"><i class="wine-dot red"></i><span>Red</span><strong data-text="18 - $consumed.filter(id => [0,1,3,7].includes(id)).length">18</strong><span aria-hidden="true">↗</span></a>
+              <a href="#inventory" data-on:click="$filter = 'white'"><i class="wine-dot white"></i><span>White</span><strong data-text="7 - $consumed.filter(id => [4,6].includes(id)).length">7</strong><span aria-hidden="true">↗</span></a>
+              <a href="#inventory" data-on:click="$filter = 'sparkling'"><i class="wine-dot sparkling"></i><span>Sparkling</span><strong data-text="3 - ($consumed.includes(2) ? 1 : 0)">3</strong><span aria-hidden="true">↗</span></a>
+              <a href="#inventory" data-on:click="$filter = 'rose'"><i class="wine-dot rose"></i><span>Rosé</span><strong data-text="2 - ($consumed.includes(5) ? 1 : 0)">2</strong><span aria-hidden="true">↗</span></a>
+            </div>
+            <a class="dashboard-action" href="#storage"><span><strong>2 bottles waiting for a home</strong><small>Find an open slot in your storage</small></span><span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="page-footnote">Sample collection · Tasting history and trends will follow.</p>
+      </section>
+    </main>
+    <footer class="preview-footer"><span>barback. / Design study 01</span><button data-dialog="review">Sample data · Preview controls</button></footer>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#inventory" data-attr:aria-current="$page === 'inventory' || $page === 'detail' ? 'page' : null"><svg><use href="#i-bottle"/></svg>Collection</a><a href="#storage" data-attr:aria-current="$page === 'storage' ? 'page' : null"><svg><use href="#i-rack"/></svg>Storage</a><a href="#add" class="mobile-add" data-attr:aria-current="$page === 'add' ? 'page' : null"><svg><use href="#i-plus"/></svg>Add bottles</a><a href="#insights" data-attr:aria-current="$page === 'insights' ? 'page' : null"><svg><use href="#i-chart"/></svg>Insights</a></nav>
+
+  <dialog id="consume" aria-labelledby="consume-title"><button class="close" data-close aria-label="Close">×</button><div class="dialog-icon"><svg><use href="#i-glass"/></svg></div><span class="eyebrow">HERE’S TO A GOOD BOTTLE</span><h2 id="consume-title">Which one are you opening?</h2><p data-show="!$rackaction">Pick its location. We’ll make the space available again.</p><p data-show="$rackaction">Open the bottle in <strong data-text="$rackslot"></strong>. Its slot will become available.</p><fieldset class="slot-options" data-show="!$rackaction"><legend>Bottle location</legend><label><input type="radio" name="consume-slot" value="A1" data-bind:slot><span><strong>Row 1 · Column A</strong><small>Main rack</small></span></label><label><input type="radio" name="consume-slot" value="A2" data-bind:slot><span><strong>Row 2 · Column A</strong><small>Main rack</small></span></label></fieldset><label class="dialog-field">Consumption date <span class="optional">Optional</span><input type="date"></label><button class="button primary full" data-on:click="$consumed = [...$consumed, $selected]; $consumedslots = {...$consumedslots, [$selected]: $slot}; $undoid = $selected; $notice = 'Bottle marked consumed. Its slot is now available.'" data-consume data-close>Mark consumed</button><p class="preview-note">Sample interaction only. Add a tasting note from the wine details.</p></dialog>
+
+  <dialog id="tasting" aria-labelledby="tasting-title"><button class="close" data-close aria-label="Close">×</button><h2 id="tasting-title">How was the wine?</h2><form id="tasting-form"><label class="dialog-field">Tasted on<input type="date"></label><label class="dialog-field">Your rating <span class="optional">Optional · 0–5</span><input type="number" min="0" max="5" step="0.1" placeholder="4.2"></label><label class="dialog-field">Tasting notes<textarea rows="4" placeholder="The first sip, the finish, the occasion…"></textarea></label><button class="button primary full" type="submit">Save tasting preview</button></form></dialog>
+  <dialog id="cellars" aria-labelledby="cellars-title"><button class="close" data-close aria-label="Close">×</button><span class="eyebrow">YOUR COLLECTIONS</span><h2 id="cellars-title">Choose a cellar</h2><button class="cellar-option" data-on:click="$cellar = 'Home cellar'" data-close><span class="avatar">H</span><span><strong>Home cellar</strong><small>Owner · 30 sample bottles</small></span></button><button class="cellar-option" data-on:click="$cellar = 'Weekend cellar'; $notice = 'Weekend cellar selected. This study reuses the same sample collection.'" data-close><span class="avatar">W</span><span><strong>Weekend cellar</strong><small>Editor · Sample collection</small></span></button><button class="cellar-option" data-on:click="$cellar = 'All my cellars'; $notice = 'All-cellar search preview. Results currently use the home cellar fixture.'" data-close><svg><use href="#i-search"/></svg><span><strong>All my cellars</strong><small>Search every collection you can access</small></span></button><button class="button secondary full" data-dialog="new-cellar">Create new cellar</button></dialog>
+  <dialog id="new-cellar" aria-labelledby="new-cellar-title"><button class="close" data-close aria-label="Close">×</button><h2 id="new-cellar-title">Make it your cellar</h2><p>Start with a name. Storage can come next.</p><form id="cellar-form"><label class="dialog-field">Cellar name<input name="name" required maxlength="80" placeholder="e.g. Home cellar"></label><button class="button primary full" type="submit">Create preview cellar</button></form></dialog>
+  <dialog id="setup" aria-labelledby="setup-title"><button class="close" data-close aria-label="Close">×</button><h2 id="setup-title">Set up your storage</h2><p>Give each bottle an address you can find.</p><form id="storage-form"><label class="dialog-field">Rack name<input required placeholder="e.g. Basement rack" data-bind:setupname></label><div class="form-grid"><label>Rows<input type="number" min="1" max="20" required data-bind:rows></label><label>Columns<input type="number" min="1" max="26" required data-bind:columns></label></div><p class="field-help"><strong data-text="Number($rows) * Number($columns)"></strong> slots · numbered rows, lettered columns</p><button class="button primary full" type="submit">Preview this rack</button></form></dialog>
+  <dialog id="signin" aria-labelledby="signin-title"><button class="close" data-close aria-label="Close">×</button><span class="brand dialog-brand" role="img" aria-label="barback."><img class="brand-image brand-light" src="/brand/wordmark-light.svg" alt="" width="2080" height="415"><img class="brand-image brand-dark" src="/brand/wordmark-dark.svg" alt="" width="2080" height="415"></span><h2 id="signin-title">Welcome back.</h2><p>Your collection is right where you left it.</p><button class="button primary full" data-on:click="$network = 'synced'; $notice = 'Sign-in preview complete. Your local collection stays in place.'" data-close>Continue with a passkey</button><p class="preview-note">Design preview · no credentials are requested.</p></dialog>
+  <dialog id="saved" aria-labelledby="saved-title"><button class="close" data-close aria-label="Close">×</button><div class="dialog-icon"><svg><use href="#i-check"/></svg></div><h2 id="saved-title">That’s the flow.</h2><p data-text="$quantity + (Number($quantity) === 1 ? ' bottle of ' : ' bottles of ') + $winename + ' in ' + $entrycellar + '.'"></p><p data-text="$placementsummary"></p><p class="muted">In the finished app, all bottles save together. This prototype keeps your real collection untouched.</p><button class="button primary full" data-navigate="inventory" data-close>Back to collection</button></dialog>
+  <dialog id="review" aria-labelledby="review-title"><button class="close" data-close aria-label="Close">×</button><span class="eyebrow">DESIGN STUDY 01</span><h2 id="review-title">Try the different states</h2><p>Static sample data. No account, database, or live sync is connected.</p><div class="theme-control"><button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode" data-theme-toggle><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/></svg><span class="theme-thumb" aria-hidden="true"></span></button><button type="button" class="theme-reset" data-theme-reset hidden>Use system</button></div><div class="review-actions"><button class="button secondary" data-on:click="$network = 'synced'" data-close>Up to date</button><button class="button secondary" data-on:click="$network = 'offline'" data-close>Offline with pending edits</button><button class="button secondary" data-on:click="$network = 'expired'" data-close>Session expired</button><button class="text-button" id="reset-preview">Reset preview</button></div></dialog>
+  <div class="toast" role="status" aria-live="polite" data-show="$notice !== ''" hidden><svg><use href="#i-check"/></svg><span data-text="$notice"></span><button data-undo data-show="$undoid >= 0" data-on:click="$consumed = $consumed.filter(id => id !== $undoid); $consumedslots = {...$consumedslots, [$undoid]: ''}; $undoid = -1; $notice = 'Undone. The bottle is back in its slot.'">Undo</button><button class="toast-close" aria-label="Dismiss notification" data-on:click="$notice = ''; $undoid = -1">×</button></div>
+  <noscript><div class="noscript">JavaScript is needed to review the interactive flows. The collection above is sample data.</div></noscript>
+</body>
+</html>

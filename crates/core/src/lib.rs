@@ -5,6 +5,7 @@
 
 pub mod ids;
 pub mod model;
+pub mod preview;
 pub mod seed;
 pub mod store;
 pub mod sync;

@@ -62,6 +62,10 @@ clean:
 
 # --- run ---
 
+# Static Barback design review; no database, auth, or sync service is started.
+preview: frontend
+    BARBACK_PREVIEW=1 BIND_ADDR="${BIND_ADDR:-127.0.0.1:8091}" cargo run --locked -p wine-server
+
 # run the server on the host (needs the db up: `just db`)
 run:
     cargo run --locked -p wine-server

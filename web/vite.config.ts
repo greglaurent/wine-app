@@ -14,7 +14,7 @@ export default defineConfig({
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
-      input: { offline: "src/offline.ts" },
+      input: { offline: "src/offline.ts", preview: "src/preview.ts" },
     },
   },
   worker: {

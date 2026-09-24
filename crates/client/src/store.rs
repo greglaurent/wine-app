@@ -40,25 +40,40 @@ pub unsafe fn ensure_schema(db: *mut ffi::sqlite3) -> Result<(), String> {
         c"CREATE TABLE IF NOT EXISTS sync_state (k TEXT PRIMARY KEY, v TEXT)",
     )?;
     // Reference mirror tables (no FKs -- it is a cache; server is authoritative).
-    run_sql(db, c"CREATE TABLE IF NOT EXISTS country (
-        id TEXT PRIMARY KEY, iso2 TEXT, iso3 TEXT, name TEXT, source TEXT, deleted_at INTEGER)")?;
+    run_sql(
+        db,
+        c"CREATE TABLE IF NOT EXISTS country (
+        id TEXT PRIMARY KEY, iso2 TEXT, iso3 TEXT, name TEXT, source TEXT, deleted_at INTEGER)",
+    )?;
     run_sql(db, c"CREATE TABLE IF NOT EXISTS bottle_format (
         id TEXT PRIMARY KEY, code TEXT, name TEXT, volume_ml INTEGER, source TEXT, deleted_at INTEGER)")?;
-    run_sql(db, c"CREATE TABLE IF NOT EXISTS descriptor (
-        id TEXT PRIMARY KEY, code TEXT, name TEXT, category TEXT, source TEXT, deleted_at INTEGER)")?;
-    run_sql(db, c"CREATE TABLE IF NOT EXISTS appellation_type (
+    run_sql(
+        db,
+        c"CREATE TABLE IF NOT EXISTS descriptor (
+        id TEXT PRIMARY KEY, code TEXT, name TEXT, category TEXT, source TEXT, deleted_at INTEGER)",
+    )?;
+    run_sql(
+        db,
+        c"CREATE TABLE IF NOT EXISTS appellation_type (
         id TEXT PRIMARY KEY, country_id TEXT, code TEXT, name TEXT, ordinal INTEGER,
-        is_legal INTEGER, is_composite INTEGER, source TEXT, deleted_at INTEGER)")?;
+        is_legal INTEGER, is_composite INTEGER, source TEXT, deleted_at INTEGER)",
+    )?;
     run_sql(db, c"CREATE TABLE IF NOT EXISTS appellation_tier (
         id TEXT PRIMARY KEY, country_id TEXT, code TEXT, name TEXT, rank INTEGER, source TEXT, deleted_at INTEGER)")?;
-    run_sql(db, c"CREATE TABLE IF NOT EXISTS classification_system (
+    run_sql(
+        db,
+        c"CREATE TABLE IF NOT EXISTS classification_system (
         id TEXT PRIMARY KEY, country_id TEXT, code TEXT, name TEXT, scope TEXT,
-        established INTEGER, revised INTEGER, notes TEXT, source TEXT, deleted_at INTEGER)")?;
+        established INTEGER, revised INTEGER, notes TEXT, source TEXT, deleted_at INTEGER)",
+    )?;
     run_sql(db, c"CREATE TABLE IF NOT EXISTS classification_level (
         id TEXT PRIMARY KEY, system_id TEXT, code TEXT, name TEXT, rank INTEGER, source TEXT, deleted_at INTEGER)")?;
-    run_sql(db, c"CREATE TABLE IF NOT EXISTS label_rule (
+    run_sql(
+        db,
+        c"CREATE TABLE IF NOT EXISTS label_rule (
         id TEXT PRIMARY KEY, country_id TEXT, kind TEXT, condition TEXT, min_percent INTEGER,
-        tolerance_percent INTEGER, notes TEXT, source TEXT, deleted_at INTEGER)")
+        tolerance_percent INTEGER, notes TEXT, source TEXT, deleted_at INTEGER)",
+    )
 }
 
 /// Every synced data table (NOT `sync_state`). Used to wipe + rebuild the local

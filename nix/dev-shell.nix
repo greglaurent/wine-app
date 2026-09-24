@@ -1,6 +1,6 @@
-{ pkgs }:
+{ pkgs, unstable }:
 let
-  tools = import ./tools.nix { inherit pkgs; };
+  tools = import ./tools.nix { inherit pkgs unstable; };
   frontend = builtins.fromJSON (builtins.readFile ../web/package.json);
   toolchain = builtins.fromTOML (builtins.readFile ../rust-toolchain.toml);
 in

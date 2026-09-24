@@ -20,7 +20,8 @@ pub fn get_dirty() -> Result<String, JsValue> {
         let mut stmt: *mut ffi::sqlite3_stmt = ptr::null_mut();
         let sql =
             c"SELECT id, lot_id, status, updated_at, deleted_at, revision FROM bottle WHERE dirty = 1";
-        if ffi::sqlite3_prepare_v2(db, sql.as_ptr(), -1, &mut stmt, ptr::null_mut()) != ffi::SQLITE_OK
+        if ffi::sqlite3_prepare_v2(db, sql.as_ptr(), -1, &mut stmt, ptr::null_mut())
+            != ffi::SQLITE_OK
         {
             return Err("prepare dirty".into());
         }
@@ -49,12 +50,16 @@ pub fn get_dirty() -> Result<String, JsValue> {
 /// Apply server push acks: clear `dirty` for accepted rows, advance the cursor.
 #[wasm_bindgen]
 pub fn apply_acks(json: String) -> Result<(), JsValue> {
-    let resp: PushResponse = serde_json::from_str(&json).map_err(|e| JsValue::from(e.to_string()))?;
+    let resp: PushResponse =
+        serde_json::from_str(&json).map_err(|e| JsValue::from(e.to_string()))?;
     unsafe {
         let db = open()?;
         for ack in &resp.acks {
-            let sql = CString::new(format!("UPDATE bottle SET dirty = 0 WHERE id = '{}'", ack.id))
-                .map_err(|e| e.to_string())?;
+            let sql = CString::new(format!(
+                "UPDATE bottle SET dirty = 0 WHERE id = '{}'",
+                ack.id
+            ))
+            .map_err(|e| e.to_string())?;
             run_sql(db, &sql)?;
         }
         sync_set(db, "cursor", &resp.cursor.to_string())?;
@@ -67,7 +72,8 @@ pub fn apply_acks(json: String) -> Result<(), JsValue> {
 /// default lot id.
 #[wasm_bindgen]
 pub fn apply_pull(json: String) -> Result<(), JsValue> {
-    let resp: PullResponse = serde_json::from_str(&json).map_err(|e| JsValue::from(e.to_string()))?;
+    let resp: PullResponse =
+        serde_json::from_str(&json).map_err(|e| JsValue::from(e.to_string()))?;
     unsafe {
         let db = open()?;
         for b in &resp.bottles {

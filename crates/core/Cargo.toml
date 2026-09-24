@@ -19,7 +19,9 @@ async-trait.workspace = true
 # kellnr registry (anonymous read). See .cargo/config.toml.
 # width-u128 pins a consistent id layout across server (native) and wasm client,
 # so client-generated ids are directly comparable (no sync-time remapping).
-causal-id = { version = "1.0.0-rc.1", registry = "abmac-io", features = ["width-u128"] }
+causal-id = { version = "1.1.0", registry = "abmac-io", features = ["width-u128"] }
+# causal-id 1.1.0 does not forward its width feature to pointer-width.
+pointer-width = { version = "1.0.0", registry = "abmac-io", features = ["width-u128"] }
 
 # build.rs generates core::vocab enums from src/vocab_enums.ron.
 [build-dependencies]
